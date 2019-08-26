@@ -1,0 +1,38 @@
+{% extends 'accountantapp/accountant_header.html' %}
+
+{% block body %}
+<br>
+<main role="main">
+
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Hello, {{request.user}}</h1>
+      <p>You are welcome to the ACCOUNTANT dashboard of The Canon Innovations Organization. You are requested to log out immediately after carrying out your duties because information accessed via this dashboard might be sensitive.</p>
+      <h3>Thank You</h3>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Permissions:</h2>
+      </div>
+      <div class="col-md-6">
+          <li>Receive Driver Payments</li>
+          <li>Generate Receipts for drivers</li>
+          <li>Pay for Main Expenses</li>
+          <li>Issue salary to staff</li>
+          <li>Issue petty cash</li>
+          <li>Generate Financial report</li>
+          <li>Submit Monthly Reports to the manager</li>
+          <li>Monitor Driver payments</li>
+          <li>Archiving of financial records</li>
+      </div>
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
+
+</main>
+{% endblock %}

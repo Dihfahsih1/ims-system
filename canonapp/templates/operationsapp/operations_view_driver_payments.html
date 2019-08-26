@@ -1,0 +1,168 @@
+{% extends "operationsapp/operations_header.html" %}
+
+
+
+{% block body %}
+
+
+
+
+
+
+    <div class="container">
+
+     <h5>General financial report of  {{ item_number }}drivers</h5>
+     <h4 class="text-danger">{{ message }}</h4>
+    <div class="table-responsive">
+
+     <table class="table table-hover" border="2">
+
+        <thead class="table-success">
+
+        <trborder="2">
+
+            <td>id</td>
+
+            <td>Driver Name</td>
+
+            <td>Car Plate</td>
+
+            <td>Amount Paid</td>
+
+            <td>Balance</td>
+            <td>statement(View)</td>
+
+            <td>Statement(Print)</td>
+
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for item in items %}
+
+            <tr>
+
+            <td>{{ item.pk }}</td>
+
+            <td>{{ item.driver_name }}</td>
+
+            <td>{{ item.driver_car }}</td>
+
+            <td>{{ item.amount_paid }}</td>
+
+            <td>{{ item.balance  }}</td>
+            
+            
+            <td>
+                <a href="{% url 'operations_display_driver_financial_statement' item.driver_name %}" class="btn btn-primary bt-sm" role="button">View</a>
+            </td>
+
+            <td>
+                <a href="{% url 'generate_operations_driver_financial_statement' item.driver_name %}" target="_new"   class="btn btn-primary bt-sm" role="button">Print</a>
+                
+            </td>
+
+         </tr>
+         {% endfor %}
+         <tr>
+             <td><h6>Total Amount paid:{{ driver_total_paid }}  UGX</h6></td>
+             <td><h6>Total balances:{{ driver_total_balance }}  UGX</h6></td>
+             <td><a href="{% url 'print_general_financial_report' %}" class="btn btn-primary bt-sm" target="_new" role="button">Print Financial Report</a></td>
+             <td>
+                 
+<!-- Button trigger modal -->
+
+    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+
+      Make SMS notification
+
+    </button>
+
+
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+      <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+
+            <h4 class="modal-title" id="myModalLabel">Send SMS</h4>
+
+          </div>
+
+          <div class="modal-body">
+
+              <form enctype="multipart/form-data" method="post">
+
+                  {% csrf_token %}
+
+                  <div class="form-group">
+
+                    <label for="exampleFormControlTextarea1">Driver Name</label>
+                    
+                     <select class="custom-select mr-sm-2" name="driver_name" id="inlineFormCustomSelect">
+                              {% for item in items %}
+                                 <option name="{{ item.driver_name }}" value="{{ item.driver_name }}">{{ item.driver_name }}</option>
+                              {% endfor %}
+                     </select>
+
+                    
+                  </div>
+
+
+
+                  <div class="form-group">
+
+                    <label for="exampleFormControlTextarea1">Message</label>
+
+                    <textarea type="text" name="sms_message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                  </div>
+
+                   <button type="submit" class="btn btn-primary mb-2">Send SMS</button>
+
+              </form>
+
+          </div>
+
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+                 
+             </td>
+             
+         </tr>
+         
+         <br/>
+
+        </tbody>
+
+    </table>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

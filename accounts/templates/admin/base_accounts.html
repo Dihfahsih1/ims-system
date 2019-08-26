@@ -1,0 +1,17 @@
+{% extends 'admin/base_test.html' %}
+
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h1 class="text-center logo my-4">
+      <img class="mb-3" src="../../static/accounts/img/logo.jpg" alt="" width="350" height="100">
+    </h1>
+    {% block content %}
+    {% endblock %}
+  </div>
+{% endblock %}

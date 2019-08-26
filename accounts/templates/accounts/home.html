@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+    <main role="main">
+
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Hello, {{request.user}}</h1>
+      <p>You are welcome to the ADMIN dashboard of The Canon Innovation Organization. You are requested to log out immediately after carrying out your duties because information accessed via this dashboard might be sensitive.</p>
+      <h3>Thank You</h3>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Permissions:</h2>
+      </div>
+      <div class="col-md-6">
+          <li>Manage system users under 'Manage User' dropdown</li>
+          <li>Manage the company departments under 'Departments dropdown'</li>
+          <li>Manage personal account under 'Profile dropdown'</li>
+      </div>
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
+
+</main>
+{% endblock %}

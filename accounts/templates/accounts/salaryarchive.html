@@ -1,0 +1,78 @@
+{% extends 'base_executive.html' %}
+
+{% block body %}
+
+    <div class="container">
+
+    <br>
+
+
+<div class="container">
+       <p>{{ message }}</p>
+        <br><br>
+        <h5>Please search for the archived Salaries Paid by <b class="btn-success">Year</b> and <b class="btn-success">Month</b></h5>
+
+                        <form class="form-inline"  method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                            <div class="col-auto my-1">
+                          <label class="mr-sm-2" for="inlineFormCustomSelect">Year</label>
+                          <select class="custom-select mr-lg-2" name="report_year" id="inlineFormCustomSelect">
+                              {% for report_year in years %}
+                                 <option class="btn-success" name="{{ report_year }}" value="{{ report_year }}">{{ report_year }}</option>
+                              {% endfor %}
+                          </select>
+                        </div>
+                            <div class="col-auto my-1">
+                          <label class="mr-sm-2" for="inlineFormCustomSelect">Month</label>
+                          <select class="custom-select mr-lg-2" name="report_month" id="inlineFormCustomSelect">
+                              {% for report_month in months %}
+                                 <option class="btn-success" name="{{ report_month }}" value="{{ report_month }}">{{ report_month }}</option>
+                              {% endfor %}
+                          </select>
+                        </div>
+                            <div class="col-auto my-1">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Search</label>
+                          <button type="submit" class="btn btn-danger">Search</button>
+                        </div>
+
+
+                        </form><br> <br>
+
+
+
+
+        <table class="table table-hover" border="2">
+
+
+            <tbody>
+            {% for archived in archived_reports  %}
+                <tr>
+                    <td>{{ archived.Date }}</td>
+                    <td>{{ archived.Staff }}</td>
+                    <td>{{ archived.Month }}</td>
+                    <td>{{ archived.Amount }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+             {% if archived_reports %}
+                 <h5>Monthly Archived Salary Report For  {{ report_month }} {{ report_year }}  </h5>
+                 <thead class="font-weight-bold ">
+                    <tr>
+                    <td>Date</td>
+                    <td>Name</td>
+                    <td>Month Paid</td>
+                    <td>Amount</td>
+                     </tr>
+                 </thead>
+                 <tr><td><b>Total Amount:</b> </td> <td>______________ </td> <td>______________  </td><td><b>{{ total_amount}}</b></td></tr>
+                 <td><a href="{% url 'salaryarchivepdf'  report_month  report_year %}" target="_new" class="btn btn-primary bt-sm" role="button">Print Report</a></td>
+             {% endif %}
+        </table>
+
+    </div>
+
+    <br><br></div>
+
+{% endblock %}

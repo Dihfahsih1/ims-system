@@ -1,0 +1,35 @@
+{% extends 'receptionistapp/reception_header.html' %}
+
+{% block body %}
+<main role="main">
+<br>
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Hello, {{request.user}}</h1>
+      <p>You are welcome to the RECEPTIONIST dashboard of The Canon Innovations Organization. You are requested to log out immediately after carrying out your duties because information accessed via this dashboard might be sensitive.</p>
+      <h3>Thank You</h3>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Permissions:</h2>
+      </div>
+      <div class="col-md-6">
+          
+          <li>View both availabe and assigned cars</li>
+          <li>View and monitor available drivers</li>
+          <li>View and generate driver payment statements</li>
+          <li>Receive and forward driver complaints</li>
+          <li>Clearing of handles complaints.</li>
+          <li>E.t.c</li>
+      </div>
+    </div>
+    <hr>
+  </div> <!-- /container -->
+
+</main>
+
+  
+{% endblock %}

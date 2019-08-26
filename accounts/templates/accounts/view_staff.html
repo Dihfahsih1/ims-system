@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="container">
+  <br>
+  
+  <blockquote class="blockquote text-center">
+  <p class="mb-0"><h3><u>Canon Staff Members</u></h3></p>
+  <footer class="blockquote-footer">Canon Innovations Limited</footer>
+</blockquote>
+
+
+     <table class="table" border="1">
+        <thead class="thead-light">
+        <br>
+        <tr border="2">
+
+            <td>id</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>D.O.B</td>
+            <td>Gender</td>
+            <td>Address</td>
+            <td>Phone</td>
+            <td>Role</td>
+            <td>Duties</td>
+            <td>Salary</td>
+            <td>Edit</td>
+            <td>Delete</td>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for item in items %}
+         <tr>
+        <td>{{ item.pk }}</td>
+        <td>{{ item.first_name }}</td>
+        <td>{{ item.last_name }}</td>
+        <td>{{ item.dob }}</td>
+        <td>{{ item.gender }}</td>
+        <td>{{ item.address }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.role }}</td>
+        <td>{{ item.duties }}</td>
+        <td>{{ item.salary }}</td>
+
+        <td><a href="{% url 'staff_update' item.pk %}" class="btn btn-outline-primary bt-sm" role="button">Edit</a></td>
+        <td><button type="button" class="btn btn-outline-danger btn-lg" data-toggle="modal" data-target="#myModal">Delete</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Delete Staff</h4>
+              </div>
+              <div class="modal-body">
+                  <h3>Delete this staff member?</h3>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                <a href="{% url 'staff_delete' item.pk %}" class="btn btn-outline-danger bt-sm" role="button">Confirm</a>
+              </div>
+            </div>
+          </div>
+        </div>
+                
+        </td>
+
+     {% endfor %}
+
+       </tr>
+
+        </tbody>
+    </table>
+    <a href="{% url 'staff_new' %}" class="btn btn-primary bt-sm" role="button">Add Staff</a>
+</div>
+{% endblock %}

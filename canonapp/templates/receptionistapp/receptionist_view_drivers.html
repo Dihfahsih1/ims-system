@@ -1,0 +1,69 @@
+{% extends "receptionistapp/reception_header.html" %}
+{% block body %}
+
+
+<div class="container">
+    <h5>All available drivers</h5>
+
+     
+           <table class="table table-hover" border="2">
+
+        <thead class="table-success">
+
+        <br>
+
+        <p>{{ info }}</p>
+            <tr border="2">
+
+            <td>No</td>
+            <td>Name</td>
+            <td>Contact</td>
+            <td>Attached Car</td>
+            <td>Driver Details</td>
+
+        </tr>
+
+
+        </thead>
+
+        <tbody>
+
+        {% for item in items %}
+
+            <tr>
+
+            <td>{{ item.pk }}</td>
+
+            <td>{{ item.driver_name }}</td>
+
+            <td>{{ item.driver_contact }}</td>
+
+            <td><a href="{% url 'receptionist_view_car_details' item.pk %}">{{ item.attached_car }}</a></td>
+            <td><a href="{% url 'receptionist_view_driver_details' item.pk %}">Driver Details</a></td>
+
+
+        {% endfor %}
+
+            </tr>
+            
+
+        <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+
+                <td><a href="{% url 'operations_export_drivers' %}" class="btn btn-primary bt-sm" role="button">Export driver data</a></td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+
+  <br/>
+
+
+</div>
+{% endblock %}

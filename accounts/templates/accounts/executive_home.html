@@ -1,0 +1,28 @@
+<!doctype html>
+{% extends 'base_executive.html' %}
+
+{% load static %}
+{% block body %}
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Hello, {{request.user}}</h1>
+          <p>You are welcome to the EXECUTIVE dashboard of The Canon Innovation Organization. You are requested to log out immediately after carrying out your duties because information accessed via this dashboard might be sensitive.</p>
+          <h3>Thank You</h3>
+        </div>
+      </div>
+    
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h2>Permissions:</h2>
+          </div>
+          <div class="col-md-8">
+              <li>View all the reports from all the departments with in the organisation under the 'Reports dropdown'</li>
+          </div>
+        </div>
+    
+        <hr>
+    
+      </div> <!-- /container -->
+{% endblock %}
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+
+    <link type="text/css" rel="stylesheet" href="{% static '/receptionistapp/css/bootstrap.min.css' %}"/>
+   <script src="{% static 'receptionistapp/js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'receptionistapp/js/rango-jquery.js' %}"></script>
+    <script src="{% static 'receptionistapp/js/bootstrap.min.js' %}"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Dashboard . Accountant</title>
+
+</head>
+
+<body><br>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="nav-link" href="{% url 'accountant_profile'  %}"><img class="mb-3" src="../../static/accounts/img/logo.jpg" alt="" width="120" height="60"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto">
+         {% with url_name=request.resolver_match.url_name %}
+            
+            
+            <li class="nav-item {% if url_name == 'accountant_make_driver_payments' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'accountant_make_driver_payments' %}">Receive payments</a>
+            </li>
+            
+            <li class="nav-item {% if url_name == 'enter_expenditure' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'enter_expenditure'  %}">Pay Main Expenses</a>
+            </li>
+            
+            <li class="nav-item {% if url_name == 'enter_sundryexpense' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'enter_sundryexpense'  %}">Pay Petty Cash</a>
+            </li>
+            
+            <li class="nav-item {% if url_name == 'pay_salary' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'pay_salary'  %}">Pay Salary</a>
+            </li>
+            
+            <li class="nav-item {% if url_name == 'display_viewstaff' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'display_viewstaff'  %}">View Staff</a>
+            </li>
+            
+            <li class="nav-item {% if url_name == 'expenditurereport' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'expenditurereport'  %}">Monthly Reports</a>
+            </li>
+            
+            <li class="nav-item {% if url_name == 'accountant_driver_payment_archive' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'accountant_driver_payment_archive' %}">Archived Records</a>
+            </li>
+            
+      </ul>
+      
+      
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active float-lg-right" >
+               <a class="nav-link" href="{% url 'logout' %}">LOG OUT</a>
+            </li>
+        </ul>
+
+         {% endwith %}
+
+      <!--
+     Form for searching
+     
+     <form class="form-inline my-2 my-md-8">
+        <input class="form-control " type="text">
+      </form>-->
+    </div>
+    
+
+
+</nav>
+
+
+{% block body %}
+{% endblock %}
+
+</body>
+</html>

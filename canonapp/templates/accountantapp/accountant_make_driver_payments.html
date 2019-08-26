@@ -1,0 +1,229 @@
+{% extends "accountantapp/accountant_header.html" %}
+
+{% block body %}
+
+
+<div class="container">
+<h3>Receive Driver Payments.</h3>
+
+
+     <br>
+
+
+<div class="row">
+
+    <div class="col-md-3">
+
+        <div class="col-md-10">
+
+      {% load crispy_forms_tags %}
+
+      <form method="post" enctype="multipart/form-data">
+
+      {% csrf_token %}
+
+          {{ form|crispy }}
+
+      <button type="submit" class="btn btn-primary" name="payment_form" >Submit</button>
+
+      </form>
+
+  </div>
+
+
+
+    </div>
+
+  <div class="col-md-9">  
+  <p>{{ message }}</p>
+  
+  <div class="table-responsive" style="width: 130%;">
+        <h4>Select driver and search all there receipts</h4>
+            <form class="form-inline" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="col-auto my-1">
+                  <select class="custom-select mr-sm-2" name="driver_name" id="inlineFormCustomSelect">
+                      {% for driver in drivers %}
+                         <option name="{{ driver.driver_name }}" value="{{ driver.driver_name }}">{{ driver.driver_name }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+                 <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary" name="receipt_search_form">Search receipts</button>
+                </div>
+            </form>
+
+    {% if all_payment_receipts %}
+    <h4> {{ driver_name }} has {{ receipt_number }} payments</h4>
+    
+    <table class="table table-hover" border="2">
+
+        <thead class="table-success">
+
+        <tr border="2">
+
+            <td>Date</td>
+            <td>Driver Name & Vehicle</td>
+            <td>Paid Amount</td>
+            <td>Paid By</td>
+            <td>Received By</td>
+            <td>Print Receipt</td>
+            <td>Edit Payment</td>
+            <td>Delete</td>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for receipt in all_payment_receipts %}
+
+            <tr>
+
+            <td>{{ receipt.date }}</td>
+
+            <td>{{ receipt.driver_name }}</td>
+
+            <td>{{ receipt.paid_amount }}</td>
+
+            <td>{{ receipt.paid_by }}</td>
+
+            <td>{{ receipt.received_by }}</td>
+            
+            {% if receipt %}
+            <td><a href="{% url 'print_driverPayment_receipt' receipt.pk %}"  target="_new" class="btn btn-primary bt-sm" role="button">Print Receipt</a></td>
+            <td><a href="{% url 'accountant_edit_driver_receipts' receipt.pk  %}" class="btn btn-primary bt-sm" role="button">Edit Payment</a></td>
+            <td>
+                <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">
+              Delete
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h2 id="myModalLabel" class="text-warning">DELETE PAYMENT</h2>
+                  </div>
+                  <div class="modal-body">
+                      <h4>Are you sure?</h4>
+                   
+                  </div>
+                  <div class="modal-footer">
+                      <a href="{% url 'accountant_delete_driver_payment' receipt.pk  %}" class="btn btn-primary bt-sm" role="button">Delete</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          
+                  </div>
+                </div>
+              </div>
+            </div>
+            </td>
+             {% endif %}
+            </tr>
+            {% endfor %}
+            
+            <tr><td><a href="{% url 'accountant_make_driver_payments' %}" class="btn btn-primary bt-sm" role="button">Back</a></td></tr>
+
+         <br/>
+
+        </tbody>
+
+    </table>
+    
+    {% else %}
+
+    <h4>Latest entry of receipt in system .</h4>
+      <table class="table table-hover" border="2">
+
+        <thead class="table-success">
+
+        <tr border="2">
+
+            <td>Date</td>
+            <td>Driver Name & Vehicle</td>
+            <td>Paid Amount</td>
+            <td>Paid By</td>
+            <td>Received By</td>
+            <td>Print Receipt</td>
+            <td>Edit Payment</td>
+            <td>Delete</td>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+       
+
+            <tr>
+            {% if items %}
+            <td>{{ items.date }}</td>
+
+            <td>{{ items.driver_name }}</td>
+
+            <td>{{ items.paid_amount }}</td>
+
+            <td>{{ items.paid_by }}</td>
+
+            <td>{{ items.received_by }}</td>
+
+            
+            <td><a href="{% url 'print_driverPayment_receipt' items.pk %}"  target="_new" class="btn btn-primary bt-sm" role="button">Print Receipt</a></td>
+            <td><a href="{% url 'accountant_edit_driver_receipts' items.pk  %}" class="btn btn-primary bt-sm" role="button">Edit Payment</a></td>
+                        <td>
+                <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">
+              Delete
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h2 id="myModalLabel" class="text-warning">DELETE PAYMENT</h2>
+                  </div>
+                  <div class="modal-body">
+                      <h4>Are you sure?</h4>
+                   
+                  </div>
+                  <div class="modal-footer">
+                      <a href="{% url 'accountant_delete_driver_payment' items.pk  %}" class="btn btn-primary bt-sm" role="button">Delete</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          
+                  </div>
+                </div>
+              </div>
+            </div>
+            </td>
+            
+            {% endif %}
+
+         </tr>
+
+         <br/>
+
+        </tbody>
+
+    </table>
+    
+    {% endif %}
+    
+    
+
+  </div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base_users.html' %}
+
+
+{% block title %}
+  {{ user.username }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'view_users' %}">Users</a></li>
+  <li class="breadcrumb-item active">{{ user.username }}</li>
+{% endblock %}

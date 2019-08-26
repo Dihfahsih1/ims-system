@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Voucher</title>
+
+        {% load staticfiles %}
+
+    <link type="text/css" rel="stylesheet" href="{% static '/css/bootstrap.css' %}"/>
+    <link type="text/css" rel="stylesheet" href="{% static '/styles.css' %}"/>
+       <style type="text/css">
+
+           @page {
+            size: A5;
+            margin: 1cm;
+        }
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+        </style>
+</head>
+<body>  
+     
+
+<div class="container">
+
+<div class="card">
+
+        <div class="card-header">
+
+            <h3>Generated on - {{ today | date:"d/m/Y" }}</h3>
+
+        </div>
+    <div class='header'>
+                   <img src="../media/canonlogo.jpg" height="100"/>
+                   <b>Canon Innovations Ltd </b><br>
+                 +256703245903<br>
+                 Mengo, Wakaliga Rd<br>
+               canoninnovationsltd@gmail.com<br>
+      </div>
+
+        <div class="list-group">
+
+            <h2 style="align-content:center" > Salaries Paid Report</h2>
+
+        </div>
+
+
+
+        <table class="table" border="2">
+
+            <thead>
+
+            <tr>
+
+                <th>Date</th>
+
+                <th>Name</th>
+
+                <th>Salary Type</th>
+
+                <th>Amount</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for salary in salaries %}
+
+                <tr>
+
+                    <td>{{ salary.Date }}</td>
+
+                    <td>{{ salary.Staff}}</td>
+
+                    <td>{{ salary.Salary_Type}}</td>
+
+                    <td>Shs:{{ salary.Amount}}</td>
+
+
+
+                </tr>
+
+            {% endfor %}
+
+              <tr>
+
+                  <td class="jumbotron"><h3>TOTAL</h3></td>
+
+                  <td class="jumbotron"><h3>----------------------</h3></td>
+
+                  <td class="jumbotron"><h3>----------------------</h3></td>
+
+                  <td class="jumbotron"><h3>Shs. {{ totalsalary }}</h3></td>
+
+              </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+</body>
+
+</html>
